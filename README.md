@@ -1,1 +1,1 @@
-I am working now
+Creating various bash sript permissions
