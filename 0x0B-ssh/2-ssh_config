@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 #Client configuration file
-nano ~/.ssh/config
+
+Host *
+	PasswordAuthentication no
+#   	HostbasedAuthentication no
+    	IdentityFile ~/.ssh/school
