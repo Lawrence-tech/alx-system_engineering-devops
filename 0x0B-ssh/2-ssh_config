@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#Client configuration file
+nano ~/.ssh/config
