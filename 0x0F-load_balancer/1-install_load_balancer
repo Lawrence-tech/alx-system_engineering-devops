@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#Set up HAproxy distributer- load balancer
+
+# Install HAproxy on a server
+apt-get -y update
+apt-get -y install haproxy=1.6.\*
+
+# Configure haproxy configuration file to distribute requests using a roundrobin algorithm
+echo '
+frontend thewebpro.tech
+        bind 0:80
+        default_backend myservers
+backend myservers
+        balance roundrobin
+        server 171158-web-01 54.209.198.21:80
+        server 171158-web-02 52.91.125.243:80
+' >> /etc/haproxy/haproxy.cfg
+
+# Restart HAproxy service
+service haproxy restart
