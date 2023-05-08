@@ -1,9 +1,9 @@
 0x0D. Web stack debugging #0
 
-Learning Objectives
+For this project,these concepts are covered:
 
-    Network basics
+	Network basics
+	
+	Docker
 
-    Docker
-
-    Web stack debugging
+	Web stack debugging
