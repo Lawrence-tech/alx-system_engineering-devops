@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-#Using debugging skills to find out what’s keeping Ubuntu container’s Nginx installation from listening on port 80
+# Using debugging skills to find out what’s keeping Ubuntu container’s
+# Nginx installation from listening on port 80
+
+sudo ln -s /etc/nginx/sites-available/thewebpro /etc/nginx/sites-enabled/
+sudo service nginx start
