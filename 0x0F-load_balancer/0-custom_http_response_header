@@ -6,7 +6,7 @@ apt-get -y update
 apt-get -y install nginx
 
 # Add a custom response header to know the server name for debugging.
-HOST_NAME=$(hostname)
+HOST_NAME=$(HOST_NAME)
 HEADER="\\\n\tadd_header X-Served-By $HOST_NAME;\n"
 FIND=$(grep "X-Server-by" /etc/nginx/sites-available/default)
 if [[ -z $FIND ]]; then
