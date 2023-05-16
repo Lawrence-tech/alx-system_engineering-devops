@@ -2,5 +2,5 @@
 # Using debugging skills to find out what’s keeping Ubuntu container’s
 # Nginx installation from listening on port 80
 
-sudo ln -s /etc/nginx/sites-available/thewebpro /etc/nginx/sites-enabled/
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx start
