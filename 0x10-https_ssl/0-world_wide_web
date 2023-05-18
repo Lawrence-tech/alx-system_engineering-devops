@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Script that retrieves and displays information about subdomains
+
+# Function to lookup DNS information for a subdomain
+lookup() {
+    dig +noall +answer "$1" |  # Use dig command to fetch DNS information
+        awk '
+        {
+            split($1, subdomainParts, ".");  # Split the subdomain by dot (".") delimiter
+            printf "The subdomain %s is a %s record and points to %s\n", subdomainParts[1], $4, $5
+        }
+        '
+}
+
+# Main script logic
+if [ "$#" -eq 1 ]; then
+    # Display information for all subdomains
+    lookup "www.$1"
+    lookup "lb-01.$1"
+    lookup "web-01.$1"
+    lookup "web-02.$1"
+elif [ "$#" -eq 2 ]; then
+    # Display information for the specified subdomain
+    lookup "$2.$1"
+fi
