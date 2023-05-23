@@ -1,55 +1,49 @@
 #!/usr/bin/python3
 """
-Script that retrieves information about an employee's TODO list progress
+Module contains python script for making an api call
 """
 
 import requests
 import sys
 
 
-def gather_data(employee_id):
+def retrieve_todo_data(user_id):
     """
-    Retrieves the TODO list progress for the given employee ID
+    Retrieves the TODO list progress for the given user ID
     """
-    # Make a GET request to retrieve employee data
-    employee_url = (
-        "https://jsonplaceholder.typicode.com/users/{}"
-        .format(employee_id)
-    )
-    response = requests.get(employee_url)
-    employee_data = response.json()
+    url = 'https://jsonplaceholder.typicode.com/users/{}/'.format(user_id)
+    todos_url = url + 'todos'
 
-    # Make a GET request to retrieve TODO list data
-    todos_url = (
-        "https://jsonplaceholder.typicode.com/todos?userId={}"
-        .format(employee_id)
-    )
-    response = requests.get(todos_url)
-    todos_data = response.json()
+    user_response = requests.get(url).json()
+    todos_response = requests.get(todos_url).json()
 
-    # Filter completed tasks
-    completed_tasks = [
-        task for task in todos_data if task["completed"]
+    completed_todos = [
+        todo for todo in todos_response if todo.get('completed')
     ]
 
-    # Display the progress information
-    employee_name = employee_data["name"]
-    total_tasks = len(todos_data)
-
-    print(
-        "Employee {} is done with tasks({}/{}):"
-        .format(employee_name, len(completed_tasks), total_tasks)
-    )
-
-    for task in completed_tasks:
-        task_title = task["title"]
-        print("    {}".format(task_title))
+    return user_response, todos_response, completed_todos
 
 
-if __name__ == "__main__":
+def print_todo_progress(user, todos, completed_todos):
+    """
+    Prints the TODO list progress for the user
+    """
+    user_name = user.get('name')
+    total_tasks = len(todos)
+    completed_tasks = len(completed_todos)
+
+    print('Employee {} is done with tasks({}/{}):'.format(
+        user_name, completed_tasks, total_tasks))
+
+    for todo in completed_todos:
+        print('\t {}'.format(todo.get('title')))
+
+
+if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print("Usage: python3 gather_data_from_an_API.py <employee_id>")
+        print('Usage: python3 retrieve_todo_data.py <user_id>')
         sys.exit(1)
 
-    employee_id = sys.argv[1]
-    gather_data(employee_id)
+    user_id = sys.argv[1]
+    user_data, todos_data, completed_tasks_data = retrieve_todo_data(user_id)
+    print_todo_progress(user_data, todos_data, completed_tasks_data)
