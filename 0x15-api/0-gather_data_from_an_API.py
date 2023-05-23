@@ -43,7 +43,7 @@ def gather_data(employee_id):
 
     for task in completed_tasks:
         task_title = task["title"]
-        print("\t{}".format(task_title))
+        print("    {}".format(task_title))
 
 
 if __name__ == "__main__":
