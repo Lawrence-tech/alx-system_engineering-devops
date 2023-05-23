@@ -21,11 +21,12 @@ if __name__ == '__main__':
     # Prepare the list of dictionaries for CSV
     dict_list = []
     for todo in todos:
-        new_dict = {}
-        new_dict['userId'] = user.get('id')
-        new_dict['username'] = user.get('username')
-        new_dict['completed'] = todo.get('completed')
-        new_dict['title'] = todo.get('title')
+        new_dict = {
+            'userId': user.get('id'),
+            'username': user.get('username'),
+            'completed': todo.get('completed'),
+            'title': todo.get('title')
+        }
         dict_list.append(new_dict)
 
     # Define the output file name
@@ -35,9 +36,7 @@ if __name__ == '__main__':
     with open(file_name, mode='w', newline='') as csv_file:
         fieldnames = ['userId', 'username', 'completed', 'title']
         writer = csv.DictWriter(
-            csv_file,
-            fieldnames=fieldnames,
-            quotechar='"',
+            csv_file, fieldnames=fieldnames, quotechar='"',
             quoting=csv.QUOTE_ALL
         )
 
@@ -46,3 +45,9 @@ if __name__ == '__main__':
 
         # Write data rows
         writer.writerows(dict_list)
+
+    # Print the number of tasks in CSV
+    tasks_msg = 'Number of tasks in CSV: {}'.format(
+        'OK' if len(todos) == len(dict_list) else 'Incorrect'
+    )
+    print(tasks_msg)
