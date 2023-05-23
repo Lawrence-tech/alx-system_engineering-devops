@@ -34,8 +34,12 @@ if __name__ == '__main__':
     # Write data to CSV file
     with open(file_name, mode='w', newline='') as csv_file:
         fieldnames = ['userId', 'username', 'completed', 'title']
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames, quotechar='"'
-                                , quoting=csv.QUOTE_ALL)
+        writer = csv.DictWriter(
+            csv_file,
+            fieldnames=fieldnames,
+            quotechar='"',
+            quoting=csv.QUOTE_ALL
+        )
 
         # Write header
         writer.writeheader()
