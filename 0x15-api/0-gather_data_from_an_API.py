@@ -12,23 +12,34 @@ def gather_data(employee_id):
     Retrieves the TODO list progress for the given employee ID
     """
     # Make a GET request to retrieve employee data
-    employee_url = "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
+    employee_url = (
+        "https://jsonplaceholder.typicode.com/users/{}"
+        .format(employee_id)
+    )
     response = requests.get(employee_url)
     employee_data = response.json()
 
     # Make a GET request to retrieve TODO list data
-    todos_url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(employee_id)
+    todos_url = (
+        "https://jsonplaceholder.typicode.com/todos?userId={}"
+        .format(employee_id)
+    )
     response = requests.get(todos_url)
     todos_data = response.json()
 
     # Filter completed tasks
-    completed_tasks = [task for task in todos_data if task["completed"]]
+    completed_tasks = [
+        task for task in todos_data if task["completed"]
+    ]
 
     # Display the progress information
     employee_name = employee_data["name"]
     total_tasks = len(todos_data)
 
-    print("Employee {} is done with tasks({}/{}):".format(employee_name, len(completed_tasks), total_tasks))
+    print(
+        "Employee {} is done with tasks({}/{}):"
+        .format(employee_name, len(completed_tasks), total_tasks)
+    )
 
     for task in completed_tasks:
         task_title = task["title"]
