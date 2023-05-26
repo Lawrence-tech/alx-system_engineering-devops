@@ -46,8 +46,14 @@ if __name__ == '__main__':
         # Write data rows
         writer.writerows(dict_list)
 
-    # Print the number of tasks in CSV
+    # Check if the number of tasks in CSV is correct
     tasks_msg = 'Number of tasks in CSV: {}'.format(
         'OK' if len(todos) == len(dict_list) else 'Incorrect'
     )
     print(tasks_msg)
+
+    # Check if the user ID and username are correct
+    user_msg = 'User ID and Username: {}'.format(
+        'OK' if user.get('id') == user_id and user.get('username') ==
+        dict_list[0]['username'] else 'Incorrect')
+    print(user_msg)
