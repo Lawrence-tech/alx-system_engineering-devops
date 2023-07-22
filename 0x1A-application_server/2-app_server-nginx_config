@@ -4,8 +4,8 @@ server {
 
         server_name 52.91.122.155;
 
-        location /hbnb_static {
-            alias /data/web_static/current/;
+      #  location /hbnb_static {
+       #     alias /data/web_static/current/;
         }
 
         # Custom header
